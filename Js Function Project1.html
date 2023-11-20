@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Function Project 1</title>
+  </head>
+  <body>
+    <script>
+      const choice = ["rock", "paper", "scissors"];
+
+      const playerchoice = prompt("Choose rock, paper, or scissors");
+
+      const autoChoise = choice[Math.floor(Math.random() * choice.length)];
+      console.log(autoChoise);
+
+      let winner = "";
+      if (playerchoice === autoChoise) {
+        winner = "Tie!";
+      } else if (playerchoice === "rock") {
+        if (autoChoise === "scissors") {
+          winner = "Player!";
+        } else {
+          winner = "Computer";
+        }
+      } else if (playerchoice === "paper") {
+        if (autoChoise === "rock") {
+          winner = "Player!";
+        } else {
+          winner = "Computer";
+        }
+      } else if (playerchoice === "scissors") {
+        if (autoChoise === "paper") {
+          winner = "Player!";
+        } else {
+          winner = "Computer";
+        }
+      } else if (
+        playerchoice !== "rock" ||
+        playerchoice !== "paper" ||
+        playerchoice !== "scissors"
+      ) {
+        console.warn("Please Select Rock, paper or scissors");
+      }
+
+      alert(`The comture choose ${autoChoise} and you choose ${playerchoice}`);
+      console.log(
+        `The comture choose ${autoChoise} and you choose ${playerchoice}`
+      );
+
+      setTimeout(function (win) {
+        if (
+          playerchoice === "rock" ||
+          playerchoice === "paper" ||
+          playerchoice === "scissors"
+        ) {
+          return (win = console.log("Winner", winner));
+        }
+      }, 2000);
+    </script>
+  </body>
+</html>

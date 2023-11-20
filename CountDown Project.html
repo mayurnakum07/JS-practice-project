@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown timer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  </head>
+
+  <style>
+    .box h1 {
+      font-size: 35px;
+    }
+  </style>
+
+  <body>
+    <div class="container mt-5">
+      <h1>Specials Day Countdown</h1>
+      <div class="box text-center bg-warning p-5 mt-3" id="box"></div>
+    </div>
+  </body>
+  <script>
+    let countDate = dayjs("09-22-2023 18:00:00");
+    console.log("countDate", countDate);
+
+    const mainCount = setInterval(function () {
+      const now = dayjs();
+      //   console.log('now', now);
+      if (now > countDate) clearInterval(mainCount);
+      const distance = countDate - now;
+      //   console.log('distance', distance);
+      const month = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
+      // console.log('month', month);
+      const day = Math.floor(
+        (distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
+      );        
+      //   console.log("day", day);
+      const hour = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      //   console.log('hour', hour);
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      // console.log('minutes', minutes);
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      //         console.log('seconds', seconds);
+
+      document.getElementById("box").innerHTML = `
+      <h1>
+        ${month} Months ${day} Days ${hour} Hours ${minutes} Minutes ${seconds} Seconds 
+      </h1>
+        `;
+      if (distance < 0) {
+        clearInterval(mainCount);
+        document.getElementById("box").innerHTML=`<h1 style='color:green'> 🥳 Specials Day Starts 🥳 </h1>`;
+      }
+    }, 1000);
+  </script>
+</html>

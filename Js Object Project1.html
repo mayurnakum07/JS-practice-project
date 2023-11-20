@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Object Project1</title>
+  </head>
+  <body>
+    <script>
+      const menu = {
+        _meal: "",
+        _price: 0,
+        set meal(mealToCheck) {
+          if (typeof mealToCheck === "string") {
+            return (this._meal = mealToCheck);
+            console.log((this._meal = mealToCheck));
+          }
+        },
+        set price(priceToCheck) {
+          if (typeof priceToCheck === "number") {
+            return (this._price = priceToCheck);
+            console.log((this._price = priceToCheck));
+          }
+        },
+
+        get todaysSpecial() {
+          if (this._meal && this._price) {
+            return `Today's special is ${this._meal} for $${this._price}!`;
+            console.log(this._meal);
+            console.log(this._price);
+          } else {
+            return "Meal or price was not set Currently";
+          }
+        },
+      };
+
+      const mealOption = ["apple", "banana", "Kiwi", "Burger"];
+      menu.meal = mealOption[Math.floor(Math.random() * mealOption.length)];
+
+      let mealPrice = () => {
+        if (menu.meal === "pizza") {
+          return (mealPrice = 3.5);
+        } else {
+          return (mealPrice = 2.5);
+        }
+      };
+      menu.price = mealPrice();
+      console.log(menu.todaysSpecial);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Object Project 2</title>
+  </head>
+  <body>
+    
+  </body>
+  <script>
+    const data = [
+      {
+        id: 1,
+        first_name: "Heloise",
+        last_name: "Offin",
+        full_name: "Heloise bob Offin John  ",
+        // word_length : define full_name last word length.
+        email: "hoffin0@cbslocal.com",
+        // Invalid_email: email property's in domain name if not a .com else email name change and name invalid_name.
+        gender: "Female",
+        ip_address: "11.99.26.126",
+        // ip_adderss property in if first number's length are not 3 else remove ip_address property.
+      },
+      {
+        id: 2,
+        first_name: "Thurstan",
+        last_name: "Matzl",
+        full_name: "Thurstan Matzl George g",
+        email: "tmatzl1@livejournal.com",
+        gender: "Male",
+        ip_address: "141.136.129.177",
+      },
+      {
+        id: 3,
+        first_name: "Brandie",
+        last_name: "Cypler",
+        full_name: "Brandie Cypler Joe ",
+        email: "bcypler2@nbcnews.jp",
+        gender: "Female",
+        ip_address: "71.158.59.89",
+      },
+      {
+        id: 4,
+        first_name: "Vasily",
+        last_name: "Ahern",
+        full_name: "Vasily Ahern Andrew",
+        email: "vahern3@ocn.ne.jp",
+        gender: "Male",
+        ip_address: "1.219.106.195",
+      },
+      {
+        id: 5,
+        first_name: "Ashlie",
+        last_name: "Prangley",
+        full_name: "Ashlie Prangley Matt ",
+        email: "aprangley4@google.co.jp",
+        gender: "Female",
+        ip_address: "212.124.76.72",
+      },
+      {
+        id: 6,
+        first_name: "Geordie",
+        last_name: "Sawforde",
+        full_name: "Geordie Sawforde",
+        email: "gsawforde5@dedecms.com",
+        gender: "Male",
+        ip_address: "189.115.55.16",
+      },
+      {
+        id: 7,
+        first_name: "Anestassia",
+        last_name: "Elrick",
+        full_name: "Anestassia Elrick  Ervine",
+        email: "aelrick6@wiley.jp",
+        gender: "Non-binary",
+        ip_address: "124.152.153.241",
+      },
+      {
+        id: 8,
+        first_name: "Filip",
+        last_name: "MacUchadair",
+        full_name: "Filip MacUchadair Roy",
+        email: "fmacuchadair7@dell.com",
+        gender: "Male",
+        ip_address: "28.36.18.234",
+      },
+      {
+        id: 9,
+        first_name: "Bette",
+        last_name: "Krause",
+        full_name: "Bette Krause",
+        email: "bkrause8@hibu.com",
+        gender: "Female",
+        ip_address: "26.255.191.197",
+      },
+      {
+        id: 10,
+        first_name: "Khalil",
+        last_name: "Martinello",
+        full_name: "Khalil Martinello ",
+        email: "kmartinello9@addthis.com",
+        gender: "Male",
+        ip_address: "191.169.187.35",
+      },
+    ];
+
+    
+
+    console.log("data", data);
+
+    const Arr = data.map((ele1) => {
+      const word = ele1.full_name.trim().split(" ").pop();
+      // console.log("word", word);
+
+      ele1.word_length = word.length;
+      // console.log("word", ele1.word_length);
+
+      const ip = ele1.ip_address.split(".")[0];
+      // console.log("ip", ip);
+      const email = ele1.email.split(".").pop();
+      console.log("email", email);
+
+      if (ip.length !== 3) {
+        delete ele1.ip_address;
+      }
+      if (email !== "com") {
+        ele1.invalid_email = ele1.email;
+        delete ele1.email;
+      }
+
+      return ele1;
+    });
+
+    // const Arr1 = data.map((ele1) => {
+    //   const word = ele1.full_name.trim().split(" ").pop();
+    //   // console.log("word", word);
+    //   const ip = ele1.ip_address.split(".")[0];
+    //   // console.log("ip", ip);
+    //   const email = ele1.email.split(".").pop().trim();
+    //   // console.log("email", email);
+
+    //   if (email === "com") {
+    //     if (ip.length === 3) {
+    //       console.log("run");
+    //       return {
+    //         ...ele1,
+    //         word_length: word.length,
+    //       };
+    //     } else {
+    //       console.log("run2");
+    //       const { ip_address, ...obj } = ele1;
+    //       return {
+    //         ...obj,
+    //         word_length: word.length,
+    //       };
+    //     }
+    //   } else {
+    //     console.log("run3");
+    //     const { email, ...obj } = ele1;
+    //     return {
+    //       ...obj,
+    //       word_length: word.length,
+    //       invalid_email: ele1.email,
+    //     };
+    //   }
+    // });
+    console.log("Arr1", Arr);
+  </script>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Api Calling 3</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      .card-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+      }
+      .card {
+        width: auto;
+        height: auto;
+        position: relative;
+      }
+      .card img {
+        height: 200px;
+        object-fit: contain;
+      }
+      .id {
+        color: red;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div id="user-details" class="user-details mb-5"></div>
+      <h1>User List</h1>
+      <div id="section" class="card-section"></div>
+    </div>
+    <script>
+      async function getApi() {
+        const response = await fetch("https://dummyjson.com/users");
+        console.log("response", response);
+        const data = await response.json();
+        console.log("data", data);
+        return data.users;
+      }
+
+      function printCard(ele) {
+        console.log("ele", ele);
+        const section = document.getElementById("section");
+        console.log("section", section);
+
+        ele.map((item) => {
+          const card = document.createElement("div");
+          console.log("card", card);
+          //   if (item.gender === "male") {
+          //     if (item.eyeColor === "Green" || item.eyeColor === "Brown") {
+          card.innerHTML = `
+                <div class='card'>
+                  <h4 class='id'>${item.id}</h4>
+                  <img src=${item.image} class='card-img-top'>
+                  <div class='card-body'>
+                      <h5 class="card-title">${item.firstName} ${item.maidenName} ${item.lastName}</h5>
+                      <hr>
+                      <b> UserName:- </b> ${item.username} <br>
+                      <b> Email:- </b> ${item.email} <br>
+                      <b> Gender:- </b> ${item.gender} <br>
+                      <b> Phone No.:- </b> ${item.phone} <br>
+                      <b> eyeColor.:- </b> ${item.eyeColor} <br>
+                      <a href="#" class="btn btn-primary mt-3">Read More...</a>
+                  </div>
+               </div>
+              `;
+          //     } else {
+          //       return null;
+          //     }
+          //   } else {
+          //     return null;
+          //   }
+          const readMore = card.querySelector(".btn");
+          console.log("readMore", readMore);
+          readMore.addEventListener("click", () => {
+            displayDetails(item);
+            console.log("item", item);
+          });
+
+          section.appendChild(card);
+        });
+      }
+
+      function displayDetails(ele) {
+        const userDetails = document.getElementById("user-details");
+        userDetails.innerHTML = `
+             <h4>  <b> Id:- </b> ${ele.id}</h4>
+             <h5>  <b> FullName:- </b> ${ele.firstName} ${ele.maidenName} ${ele.lastName}</h5> 
+                <b> age.:- </b> ${ele.age} <br>
+                <b> Gender:- </b> ${ele.gender} <br>
+                <b> Email:- </b> ${ele.email} <br>
+                <b> Phone No.:- </b> ${ele.phone} <br>
+                <b> ssn.:- </b> ${ele.ssn} <br>
+                <b> university.:- </b> ${ele.university} <br>
+                <b> IP.:- </b> ${ele.ip} <br>
+                <b> eyeColor.:- </b> ${ele.eyeColor} <br>
+                <b> birthDate.:- </b> ${ele.birthDate} <br>
+                <b> userAgent.:- </b> ${ele.userAgent} <br>
+                <b> UserName:- </b> ${ele.username} <br>
+                <b> Password:- </b> ${ele.password} <br>
+        `;
+      }
+
+      window.addEventListener("load", async () => {
+        const apiData = await getApi();
+        console.log("apiData", apiData);
+        printCard(apiData);
+      });
+    </script>
+  </body>
+</html>

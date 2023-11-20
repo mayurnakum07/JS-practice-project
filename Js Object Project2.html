@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Object Project 2</title>
+  </head>
+  <body>
+    <script>
+      const team = {
+        _players: [
+          {
+            firstName: "Pete",
+            lastName: "Wheeler",
+            age: 54,
+          },
+          {
+            firstName: "Mike",
+            lastName: "Wheiner",
+            age: 42,
+          },
+          {
+            firstName: "Mark",
+            lastName: "Rashford",
+            age: 32,
+          },
+        ],
+        _games: [
+          {
+            opponent: "Broncos",
+            teamPoints: 42,
+            opponentPoints: 27,
+          },
+          {
+            opponent: "Lemur",
+            teamPoints: 22,
+            opponentPoints: 13,
+          },
+          {
+            opponent: "Ashton",
+            teamPoints: 14,
+            opponentPoints: 21,
+          },
+        ],
+        get players() {
+          return this._players;
+        },
+        get games() {
+          return this._games;
+        },
+        addPlayer(first, last, age) {
+          let player = {
+            firstName: first,
+            lastName: last,
+            age: age,
+          };
+          this.players.push(player);
+        },
+        addGames(name, mypoint, opppoint) {
+          opponent: name;
+          teamPoints: mypoint;
+          opponentPoints: opppoint;
+        },
+      };
+
+      console.log(team);
+
+      team.addGames("rajdeep", 78, 33);
+      team.addGames("valu", 81, 56);
+      team.addGames("kalu", 45, 12);
+
+      team.addPlayer("Mayur", "Nakum", 19);
+      team.addPlayer("Nadi", "Kalsariya", 18);
+      team.addPlayer("Jk", "Jalandhra", 21);
+    </script>
+  </body>
+</html>

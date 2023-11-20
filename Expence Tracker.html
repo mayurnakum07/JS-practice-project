@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    .box {
+      padding: 50px;
+      box-shadow: 5px 5px 10px #c1c1c1, -5px -5px 10px #9ea1b3;
+    }
+    form button {
+      width: 50%;
+    }
+  </style>
+  <body>
+    <div class="container mt-5">
+      <h1>Expense Tracker</h1>
+      <div class="box col-md-10 bg-light m-auto mt-3">
+        <h2>Add Item</h2>
+        <br />
+        <form id="form" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Type</label>
+            <select
+              id="select"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option disabled selected value="0">Open this select menu</option>
+              <option value="Card">Card</option>
+              <option value="Cash">Cash</option>
+              <option value="Cryptocoin">Cryptocoin</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label"> Name</label>
+            <input id="name" type="text" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Date</label>
+            <input id="date" type="date" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Ammount</label>
+            <div class="input-group">
+              <span class="input-group-text">$</span>
+              <input id="ammount" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary mt-4"
+            onclick="myfunction()"
+          >
+            Add a new expense
+          </button>
+        </form>
+
+        <table
+          id="table"
+          class="table table-bordered table-hover text-center mt-5"
+        >
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Ammount</th>
+              <th>Option 1</th>
+              <th>Option 2</th>
+            </tr>
+          </thead>
+          <tbody id="tablebody"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function myfunction() {
+      const select = document.getElementById("select").value;
+      console.log("select", select);
+      const name = document.getElementById("name").value;
+      console.log("name", name);
+      const date = document.getElementById("date").value;
+      console.log("date", date);
+      const ammount = document.getElementById("ammount").value;
+      console.log("ammount", ammount);
+
+      if (select === 0 || name === "" || date === "" || ammount === "") {
+        console.log("faild alert");
+        return alert("Please fill the all data");
+      }
+      if (isNaN(ammount)) {
+        console.log("worng ammount");
+        return alert("please enter valid ammount");
+      }
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+          <td>${select}</td>
+          <td>${name}</td>
+          <td>${date}</td>
+          <td>${ammount}</td>
+          <td><button class='btn btn-primary' onclick='editRow(this)'>Edit</button></td> 
+          <td><button class='btn btn-danger'onclick='deleteRow(this)'>Delete</button></td> 
+          `;
+
+      console.log("row", row);
+
+      document.getElementById("tablebody").appendChild(row);
+      document.getElementById("form").reset();
+      console.log("reset form");
+
+      addLocalStorage();
+    }
+
+    function editRow(button) {
+      const eRow = button.parentNode.parentNode;
+      console.log("eRow", eRow);
+      const cells = document.getElementsByTagName("td");
+      console.log("cells", cells);
+
+      const select = cells[0].textContent;
+      const name = cells[1].textContent;
+      const date = cells[2].textContent;
+      const ammount = cells[3].textContent;
+
+      document.getElementById("select").value = select;
+      document.getElementById("name").value = name;
+      document.getElementById("date").value = date;
+      document.getElementById("ammount").value = ammount;
+
+      eRow.parentNode.removeChild(eRow);
+      console.log("Remove Row");
+
+      addLocalStorage();
+    }
+
+    function deleteRow(button) {
+      const dRow = button.parentNode.parentNode;
+      console.log("dRow", dRow);
+      dRow.remove();
+      console.log("deleteRow");
+
+      addLocalStorage();
+    }
+
+    function addLocalStorage() {
+      const rows = document.querySelectorAll("#tablebody tr");
+      console.log("add", rows);
+      const data = [];
+      rows.forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        const rowData = {
+          select: cells[0].textContent,
+          name: cells[1].textContent,
+          date: cells[2].textContent,
+          ammount: cells[3].textContent,
+        };
+        data.push(rowData);
+        console.log("data", data);
+      });
+      localStorage.setItem("Form Data", JSON.stringify(data));
+    }
+
+    function loadData() {
+      const data = JSON.parse(localStorage.getItem("Form Data")) || [];
+      console.log("loadData", data);
+      data.forEach((rowData) => {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td>${rowData.select}</td>
+          <td>${rowData.name}</td>
+          <td>${rowData.date}</td>
+          <td>${rowData.ammount}</td>
+          <td><button class='btn btn-primary' onclick='editRow(this)'>Edit</button></td> 
+          <td><button class='btn btn-danger'onclick='deleteRow(this)'>Delete</button></td> 
+        `;
+        document.getElementById("tablebody").appendChild(newRow);
+      });
+    }
+    window.addEventListener("load", () => {
+      loadData();
+      console.log("event");
+    });
+  </script>
+</html>

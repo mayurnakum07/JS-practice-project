@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Function Project 2</title>
+  </head>
+  <body>
+    <script>
+      function calculateSleep(actualSleep, idealSleep) {
+        if (actualSleep !== null || idealSleep !== null) {
+          const sleepDebt = idealSleep - actualSleep;
+          if (sleepDebt > 0) {
+            console.log(
+              `You are got ${sleepDebt} Hour Sleep than you needed this week.Get some rest. `
+            );
+          } else {
+            console.log(`You have got ${actualSleep} hours of sleep this week it is a perfect amount.`);
+          }
+        } else {
+          console.log(
+            "Please Select Your actualSleep Hour and IdealSleep Hour "
+          );
+        }
+      }
+
+      const actualSleep = prompt("you Are actualSleep Hour in Week");
+      const idealSleep = prompt("you Are IdealSleep Hour in Week");
+      console.log("actualSleep", actualSleep);
+      console.log("idealSleep", idealSleep);
+
+      calculateSleep(actualSleep, idealSleep);
+    </script>
+  </body>
+</html>

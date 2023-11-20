@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container col-md-8">
+    <br />
+    <h1>Form Validation</h1>
+    <br />
+    <form name="theForm" method="post" id="myForm">
+      <label class="form-label">First Name</label>
+      <input type="text" class="form-control " id="Fname" required onKeyup="checkForm()" />
+      <div class="invalid-feedback">Please Enter Your First Name</div>
+
+      <br />
+
+      <label for="Lname" class="form-label">Last Name</label>
+      <input type="text" class="form-control " id="Lname" required onKeyup="checkForm()" />
+      <div class="invalid-feedback">Pleasetutymiujht Enater Your Last Name</div>
+
+      <br />
+
+      <label for="Email" class="form-label">Email Address</label>
+      <input type="email" class="form-control " id="Email" required onKeyup="checkForm()" />
+      <div class="invalid-feedback">
+        Please provide a valid city.Your Email
+      </div>
+
+      <br />
+
+      <label for="PassWord" class="form-label">Password</label>
+      <input type="password" class="form-control " id="Password" required onKeyup="checkForm()" />
+      <div class="invalid-feedback">Please Your Password</div>
+
+      <br />
+      <button id="submitForm" type="button" onclick="addFormData()" class="btn btn-primary" disabled>
+        Submit
+      </button>
+    </form>
+    <br />
+    <br />
+    <div id="table-contain">
+      <table class="table table-striped table-hover" id="dataTable" style="display: none">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <script src="Validation-1.js"></script>
+</body>
+
+</html>

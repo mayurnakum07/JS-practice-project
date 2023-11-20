@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #adefd1ff;
+    }
+
+    .heading {
+      margin: 30px;
+      position: absolute;
+      z-index: 999;
+      color: #00203fff;
+    }
+
+    .wrapper {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 53%;
+      left: 50%;
+    }
+
+    .content {
+      width: 70vmin;
+      height: 70vmin;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2vmin;
+    }
+
+    .button-option {
+      width: 22vmin;
+      height: 22vmin;
+      background: #00203fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 12vmin;
+      color: #adefd1ff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 1.5rem;
+    }
+
+    #restart,
+    #undo {
+      padding: 0.8rem 1.8rem;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: royalblue;
+      color: white;
+    }
+
+    .popup {
+      background: #adefd1ff;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      display: flex;
+      z-index: 2;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #message {
+      color: #00203fff;
+      text-align: center;
+      font-size: 100px;
+    }
+
+    .popup button {
+      padding: 1rem 3rem;
+      font-size: 30px;
+      border: none;
+      border-radius: 10px;
+      background-color: #00203fff;
+      color: white;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="container mt-5 heading">
+      <h1>Tic Tac Toe</h1>
+    </div>
+
+    <div class="wrapper container">
+      <div class="content m-auto">
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+        <button class="button-option"></button>
+      </div>
+      <div class="btn-group">
+        <button id="restart">Restart</button>
+        <button id="undo">undo</button>
+      </div>
+    </div>
+
+    <div class="popup hide">
+      <p id="message">Sample Message</p>
+      <button id="new-game">New Game</button>
+    </div>
+  </body>
+  <script>
+    //DOM
+    let btnRef = document.querySelectorAll(".button-option");
+    let restart = document.getElementById("restart");
+    let undo = document.getElementById("undo");
+    let popupRef = document.querySelector(".popup");
+    let message = document.getElementById("message");
+    let newgameBtn = document.getElementById("new-game");
+    let gameHistory = [];
+    console.log("btnRef", btnRef);
+    console.log("restart", restart);
+    console.log("undo", undo);
+    console.log("popupRef", popupRef);
+    console.log("message", message);
+    console.log("newgameBtn", newgameBtn);
+
+    //winning Pattern Array
+    let winningPattern = [
+      [0, 1, 2],
+      [0, 3, 6],
+      [0, 4, 8],
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 4, 5],
+      [6, 7, 8],
+      [2, 4, 6],
+    ];
+    console.log("winningPattern", winningPattern);
+
+    let Xturn = true;
+    let count = 0;
+
+    //Disable All Button
+    const disableButtons = () => {
+      btnRef.forEach((ele) => (ele.disabled = true));
+      setTimeout(() => {
+        popupRef.classList.remove("hide");
+      }, 900);
+    };
+
+    const enableButtons = () => {
+      btnRef.forEach((ele) => {
+        // console.log(ele);
+        ele.innerText = "";
+        ele.disabled = false;
+      });
+      popupRef.classList.add("hide");
+    };
+
+    //This function is executed when a player wins
+    const winFuncton = (letter) => {
+      disableButtons();
+      if (letter == "X") {
+        message.innerHTML = `&#x1F389; <br> 'X' Wins`;
+        console.log("X Won");
+      } else {
+        message.innerHTML = `&#x1F389; <br> 'O' Wins`;
+        console.log("O Won");
+      }
+    };
+
+    // function of draw
+    const drawFunction = () => {
+      disableButtons();
+      message.innerHTML = "&#x1F60E; <br> It's a Draw";
+      console.log("Game Draw");
+    };
+
+    //new Games
+    newgameBtn.addEventListener("click", () => {
+      console.warn("new game");
+      count = 0;
+      enableButtons();
+    });
+    restart.addEventListener("click", () => {
+      console.warn("game Restart");
+      count = 0;
+      enableButtons();
+    });
+
+    //Win Logic
+    const winChecker = () => {
+      for (let i of winningPattern) {
+        let [ele1, ele2, ele3] = [
+          btnRef[i[0]].innerText,
+          btnRef[i[1]].innerText,
+          btnRef[i[2]].innerText,
+        ];
+        // console.log(ele1);
+        if (ele1 != "" && (ele2 != "") & (ele3 != "")) {
+          if (ele1 == ele2 && ele2 == ele3) {
+            winFuncton(ele1);
+          }
+        }
+      }
+    };
+
+    //Display X/O on Click
+    btnRef.forEach((ele1, index) => {
+      ele1.addEventListener("click", () => {
+        if (!ele1.innerText) {
+          if (Xturn) {
+            Xturn = false;
+            ele1.innerText = "X";
+            ele1.disabled = true;
+            console.log("dispaly X");
+          } else {
+            Xturn = true;
+            ele1.innerText = "O";
+            ele1.disabled = true;
+            console.log("dispaly O");
+          }
+          ele1.disabled = true;
+          count += 1;
+
+          gameHistory.push({ index, Xturn });
+          undo.disabled = false;
+
+          if (count == 9) {
+            drawFunction();
+          }
+          winChecker();
+        }
+      });
+    });
+
+    undo.addEventListener("click", () => {
+      console.log("undo");
+      if (gameHistory.length > 0) {
+        const { index, Xturn: lastxturn } = gameHistory.pop();
+        btnRef[index].innerText = "";
+        btnRef[index].disabled = false;
+        Xturn = lastxturn;
+        count -= 1;
+        undo.disabled = gameHistory.length === 0;
+        winChecker();
+      }
+    });
+
+    window.onload = enableButtons;
+  </script>
+</html>

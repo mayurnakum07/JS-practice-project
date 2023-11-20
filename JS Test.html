@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // function Person(First, Last, Age, Gender) {
+      //   this.firstName = First;
+      //   this.lastName = Last;
+      //   this.age = Age;
+      //   this.gender = Gender;
+      // }
+      // Person.prototype.nationality = "Indian";
+
+      // Person.prototype.name = function () {
+      //   return this.firstName + " " + this.lastName + " " + this.age;
+      // };
+
+      // const jorn = new Person("Jorn", "Doe", "24", "Male");
+      // const sally = new Person("Sally", "Sorn", "25", "Female");
+
+      // console.log(
+      //   `${jorn.firstName} ${jorn.lastName} ${jorn.age} ${jorn.gender} ${jorn.nationality}`
+      // );
+
+      // console.log(jorn.name());
+
+      // console.log(
+      //   `${sally.firstName} ${sally.lastName}  ${sally.age} ${sally.gender}`
+      // );
+
+      // const name = [1, 2, 3, 4, 5, 6];
+      // let x = "";
+
+      // for (const i of name) {
+      //   x += i + " || ";
+      // }
+
+      // console.log(x);
+
+      // function myFunction() {
+      //   let n = 0;
+      //   return {
+      //     next: function () {
+      //       n += 10;
+      //       return { value: n, done: false };
+      //     },
+      //   };
+      // }
+
+      // const n = myFunction();
+      // n.next();
+      // n.next();
+      // n.next();
+      // n.next();
+
+      // console.log(n.next().value);
+
+      // newNum = {};
+      // console.log(newNum);
+      // newNum[Symbol.iterator] = function () {
+      //   let m = 0;
+      //   console.log(m);
+      //   done = false;
+      //   return {
+      //     next() {
+      //       m += 10;
+      //       console.log(m);
+      //       if (m == 100) {
+      //         done = true;
+      //         console.log(m);
+      //       }
+      //       return { value: m, done: done };
+      //     },
+      //   };
+      // };
+
+      // let iterator = newNum[Symbol.iterator]();
+
+      // let txt = "";
+      // while (true) {
+      //   const result = iterator.next();
+      //   if (result.done) break;
+      //   txt += result.value + " | ";
+      // }
+
+      // console.log(txt);
+
+      // const latter = new Set(["a", "b", "c", "d"]);
+
+      // const a = 1;
+      // const b = 2;
+      // const c = 3;
+
+      // latter.add(a);
+      // latter.add(a);
+      // latter.add(b);
+      // latter.add("e");
+      // latter.add("f");
+      // latter.add(c);
+
+      // const iter = latter.entries();
+      // let text = "";
+
+      // for (const x of iter) {
+      //   text += x + " | ";
+      // }
+
+      // console.log(latter instanceof Set);
+      // console.log(latter.size);
+      // console.log(text);
+
+      // const fruits = new Map([
+      //   ["apple", 500],
+      //   ["Banana", 300],
+      //   ["Kiwi", 650],
+      // ]);
+
+      // fruits.set("Orange", 740);
+      // fruits.set("apple", 200);
+      // fruits.delete("Banana");
+
+      // var kay = "";
+
+      // fruits.forEach(function (value, key) {
+      //   kay += key + " = " + value + " | ";
+      // });
+
+      // var en = 0;
+
+      // for (const e of fruits.values()) {
+      //   en += e;
+      // }
+
+      // console.log(fruits.size);
+      // console.log(fruits.has("Banana"));
+      // console.log(typeof fruits);
+      // console.log(fruits instanceof Map);
+      // console.log(kay);
+      // console.log(en);
+
+      // const person2 = {
+      //   firstName: "John",
+      //   lastName: "Doe",
+      //   language: "Hindi",
+      // };
+
+      // Object.defineProperty(person2, "FullName", {
+      //   get: function () {
+      //     return this.firstName + " " + this.lastName + " " + this.language;
+      //   },
+      // });
+      // console.log(Object.keys(person2));
+      // console.log(person2.FullName);
+
+      // // const calcu = {
+      // //   name: "jorn",
+      // //   age: "25",
+      // //   full: function () {
+      // //     alert(`my full Detail :- name:- ${this.name} age:- ${this.age}`);
+      // //   },
+      // // };
+      // // console.log(calcu.full());
+
+      // const Obj1 = { a: 1 };
+      // const Obj2 = { b: 2 };
+      // const Obj3 = { c: 3 };
+      // const o2 = { [Symbol("foo")]: 2 };
+
+      // const result = Object.assign({}, o2, Obj1, Obj2, Obj3);
+
+      // console.log(result);
+
+      // const person = {
+      //   printIn: function () {
+      //     console.log(`name : ${this.name} & Human : ${this.Human}`);
+      //   },
+      // };
+      // const me = Object.create(person);
+
+      // me.name = "Jorn";
+      // me.Human = true;
+
+      // me.printIn();
+
+      // function Shape() {
+      //   this.x = 0;
+      //   this.y = 0;
+      // }
+
+      // Shape.prototype.move = function (x, y) {
+      //   this.x += x;
+      //   this.y += y;
+      //   console.log("Shape Moved");
+      // };
+
+      // function reTarget() {
+      //   Shape.call(this);
+      // }
+
+      // reTarget.prototype = Object.create(Shape.prototype, {
+      //   constructor: {
+      //     value: reTarget,
+      //     enumerable: false,
+      //     writable: true,
+      //     configurable: true,
+      //   },
+      // });
+
+      // const react = new reTarget();
+      // console.log(react instanceof reTarget);
+      // console.log(react instanceof Shape);
+      // react.move(1, 1);
+
+      // const object1 = {};
+
+      // Object.defineProperty(object1, "property1", {
+      //   value: 42,
+      //   writable: true,
+      // });
+      // object1.property1 = 75;
+      // console.log(object1.property1);
+
+      // const obj = {
+
+      // };
+      // console.log(obj);
+
+      // const descibed = Object.create(null);
+      // descibed.value = "static";
+      // console.log(descibed);
+
+      // Object.defineProperty(obj, "key", descibed);
+      // console.log(obj);
+
+      // Object.defineProperty(obj, "key2", {
+      //   enumerable: false,
+      //   configurable: false,
+      //   writable: false,
+      //   value: "static",
+      // });
+      // console.log(obj);
+
+      // function withValue(value) {
+      //   const d =
+      //     withValue.d ||
+      //     (withValue.d = {
+      //       enumerable: false,
+      //       writable: false,
+      //       configurable: false,
+      //       value,
+      //     });
+      //   console.log(value);
+      //   console.log(d);
+
+      //   if (d.value !== value) d.value = value;
+      //   return d;
+      // }
+      // Object.defineProperty(obj, "key", withValue("static"));
+
+      // (Object.freeze || Object)(Object.prototype);
+
+      // const Obj = {
+      //   a: "Jorn ",
+      //   b: "Doe",
+      // };
+      // for (const [key, value] of Object.entries(Obj)) {
+      //   console.log(`${key} : ${value}`);
+      // }
+
+      // const Obj = {
+      //   prop: 10,
+      // };
+
+      // Object.freeze(Obj);
+
+      // Obj.prop = 50;
+      // console.log(Obj)
+
+      // const entries = new Map([
+      //   ["foo", "bar"],
+      //   ["baz", 42],
+      // ]);
+
+      // const obj = Object.fromEntries(entries);
+
+      // console.log(obj);
+
+      // console.log(Object.is(1, 1));
+
+      function Dog(name) {
+        this.name = name;
+      }
+
+      const dog1 = new Dog("Dobar Man");
+
+      Dog.prototype.toString = function dogToString() {
+        return `${this.name}`;
+      };
+
+      console.log(dog1.toString());
+
+      // function Dog(name) {
+      //   this.name = name;
+      // }
+
+      // const dog1 = new Dog("Gabby");
+
+      // Dog.prototype.toString = function dogToString() {
+      //   return `${this.name}`;
+      // };
+
+      // console.log(dog1.toString());
+    </script>
+  </body>
+</html>

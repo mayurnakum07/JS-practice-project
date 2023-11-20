@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Loop Project</title>
+  </head>
+  <body>
+    <script>
+      let input = "Hello Mr.Jorn how are You";
+      console.log(input);
+      let vowels = ["a", "e", "i", "o", "u"];
+      console.log(vowels);
+      let Arr = [];
+
+      for (let i = 0; i < input.length; i++) {
+        for (let j = 0; j < vowels.length; j++) {
+          if (input[i] === vowels[j]) {
+            if (input[i] === "e") {
+              Arr.push("ee");
+            } else if (input[i] === "u") {
+              Arr.push("uu");
+            } else {
+              Arr.push(input[i]);
+            }
+          }
+        }
+      }
+
+      console.log(Arr.join("").toUpperCase());
+
+      //       let input = "Gone with the wind";
+      // let vowels = ['a','e', 'i',' o', 'u'];
+      // let resultArray = [];
+
+      // for (let i = 0; i < input.length; i++) {
+      //  for(let j = 0; j < vowels.length; j++) {
+
+      //     if(input[i] === vowels[j]) {
+      //       if(input[i] === "e") {
+      //         resultArray.push('ee');
+      //       } else if(input[i] === "u"){
+      //         resultArray.push('uu');
+      //       } else {
+      //         resultArray.push(input[i]);
+      //       }
+      //     }
+      //   }
+      // }
+      // console.log(resultArray.join('').toUpperCase());
+    </script>
+  </body>
+</html>

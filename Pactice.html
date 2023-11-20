@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice Task</title>
+  </head>
+  <body>
+    <script>
+      //  ******************************************** Operator ********************************************
+
+      //  ----------------------- Arithmetic Operator -----------------------
+
+      let qual = 10;
+      console.log(qual);
+
+      let sum = 10 + 5;
+      console.log(sum);
+
+      let sub = 10 - 5;
+      console.log(sub);
+
+      let multi = 10 * 5;
+      console.log(multi);
+
+      let divide = 10 / 5;
+      console.log(divide);
+
+      console.log("");
+
+      //  ----------------------- Assignment Operator -----------------------
+
+      let nsum = 10;
+      nsum = nsum + 20;
+      nsum += 30;
+      console.log(nsum);
+
+      console.log("");
+
+      //  ----------------------- Comparison Operator -----------------------
+
+      let compare1 = "5";
+      let compare2 = 5;
+
+      console.log(compare1 == compare2);
+
+      console.log(compare1 === compare2);
+
+      console.log(compare1 != compare2);
+
+      console.log(compare1 !== compare2);
+
+      console.log(compare1 < compare2);
+
+      console.log(compare1 > compare2);
+
+      console.log(compare1 <= compare2);
+
+      console.log(compare1 >= compare2);
+
+      console.log("");
+
+      //  ----------------------- Logical Operator -----------------------
+
+      let Logic1 = true;
+      let Logic2 = true;
+
+      console.log(Logic1 && Logic2);
+      console.log(Logic1 || Logic2);
+      console.log((Logic1 = !Logic2));
+      console.log("");
+
+      //  ----------------------- Ternary Operator -----------------------
+
+      let condition = true;
+      let a = 0;
+      let b = 0;
+
+      if (condition === true) {
+        a++;
+        b++;
+      }
+      console.log(`a = ${a} , b = ${b}`);
+
+      i = true ? (a++, b++) : ((a = 0), (b = 0));
+      console.log(`a = ${a} , b = ${b}`);
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Functions ********************************************
+
+      //  ----------------------- Calling Function -----------------------
+
+      function fun(num1, num2) {
+        return num1 + num2;
+      }
+
+      console.log(fun(5, 4));
+      console.log(" ");
+
+      //  ----------------------- Arrow Function -----------------------
+
+      const myfun = () => {
+        console.log("Hello World");
+      };
+
+      myfun();
+
+      const myFun1 = (waight) => {
+        console.log(`Your Waight Is ${waight} Kg.`);
+      };
+
+      myFun1(65);
+
+      const myfun2 = (first, second) => {
+        return first + second;
+      };
+
+      console.log(myfun2(25, 27));
+      console.log(" ");
+      //  ----------------------- Anonymous  Function -----------------------
+
+      function nfun() {
+        console.log("Hello World!");
+      }
+      nfun();
+
+      const nfun1 = function () {
+        console.log("Hello World!");
+      };
+      nfun1();
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Arrays ********************************************
+
+      //  ----------------------- Creating Array -----------------------
+
+      const Arr = [1, 2, 3, 4, 5, 6];
+      console.log(Arr);
+
+      const Arr1 = [1, "mix", 5, "hello", false, null];
+      console.log(Arr1);
+
+      const nArr = new Array("Mayur", "Nadi", "jk", "rajdeep");
+      console.log(nArr);
+      console.log("");
+
+      //  ----------------------- Accessing the Elements of an Array -----------------------
+
+      const frndName = ["jk", "nadi", "rajdeep", "shlok"];
+      console.log(frndName);
+      console.log(frndName[3]);
+      console.log("");
+      //  ----------------------- Nested Array -----------------------
+
+      const food = [
+        ["Apple", "Orange", "Banana"],
+        ["Strawberry", "Blueberry", "Raspberry"],
+        ["Potato", "Carrot", "Broccoli"],
+      ];
+      console.log(food);
+
+      console.log(food[0][1]);
+      console.log(food[1][2]);
+      console.log(food[2][0]);
+      console.log("");
+      //  ----------------------- Array Method -----------------------
+
+      const method = ["Mayur", "jk", "nadi", "rajdeep", "valu", "denish"];
+      console.log(method);
+      const method1 = ["apple", "😊", "kiwi", "gwava", "graps"];
+      console.log(method1);
+      const method2 = [1, 2, 3, 4, 5, 6];
+      console.log(method2);
+      let emty = "";
+      const callback = (e) => e % 2 !== 0;
+
+      console.log("at", method.at(2));
+      console.log("Concat", method.concat(method1));
+      console.log(method.copyWithin(3, 2, 1));
+      console.log(method.every((e) => e !== undefined));
+      console.log(method.filter((e) => e.length < 5));
+      console.log(method.find((e) => e.length < 5));
+      console.log(method.findIndex((e) => e.length < 5));
+      console.log(method.findLast((e) => e.length < 5));
+      console.log(method.findLastIndex((e) => e.length < 5));
+      method2.forEach((e) => (emty += e));
+      console.log(emty);
+      console.log(method2.includes(2));
+      console.log(method.indexOf("nadi"));
+      console.log(Array.isArray(method));
+      console.log(method1.join());
+      console.log(method.lastIndexOf("rajdeep"));
+      console.log(method1.length);
+      console.log(method2.map((e) => e * 2));
+      console.log(method.pop());
+      console.log(method);
+      console.log(method.push("denish"));
+      console.log(method);
+      console.log(method2.reduce((ecu, cur) => ecu + cur));
+      console.log(method.reverse());
+      console.log(method.shift());
+      console.log(method);
+      console.log(method.unshift("denish"));
+      console.log(method);
+      console.log(method.some(callback));
+      console.log(method.sort());
+      console.log(method1.splice(2, 0, "new", "India"));
+      console.log(method1);
+      console.log(method1.toReversed());
+      console.log(method1.toSorted());
+      console.log(method1.toSpliced(3, 3));
+      console.log(method.toString());
+      console.log(method.valueOf());
+      console.log(method1.with());
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Map ********************************************
+
+      const fisrtmap = new Map([
+        ["Gryffindor", "Harry Potter"],
+        ["Slytherin", "Draco Malfoy"],
+        ["Hufflepuff", "Cedric Diggory"],
+      ]);
+      console.log(fisrtmap);
+      console.log("");
+
+      //  ----------------------- Map Method -----------------------
+
+      const secondmap = new Map([
+        ["Apple", 5],
+        ["Orange", 6],
+        ["kiwi", 4],
+        ["banana", 8],
+        ["Gwava", 2],
+      ]);
+      console.log(secondmap);
+      console.log(secondmap.delete("Orange"));
+      console.log(secondmap);
+      console.log(secondmap.delete("85485"));
+      console.log(secondmap.get("Apple"));
+      console.log(secondmap.get("Orange"));
+      console.log(secondmap.has("Apple"));
+      console.log(secondmap.has("yoiuou"));
+      console.log(secondmap.set("mirchi", 8));
+      console.log(secondmap.size);
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Loop ********************************************
+
+      //  ----------------------- While Loop -----------------------
+
+      let loop1 = 0;
+
+      while (loop1 < 5) {
+        console.log(loop1);
+        loop1++;
+      }
+      console.log("");
+
+      //  ----------------------- Do While Loop -----------------------
+
+      let loop2 = 0;
+      let loop2i = 0;
+      do {
+        loop2 = loop2 + loop2i;
+        console.log(loop2);
+        loop2i++;
+      } while (loop2 < 20);
+      console.log("");
+
+      //  ----------------------- For Loop -----------------------
+
+      for (let loop3 = 0; loop3 < 5; loop3++) {
+        console.log(loop3);
+      }
+      console.log("");
+
+      //  ----------------------- For Of Loop -----------------------
+
+      const loop4Item = ["Mayur", "nadi", "jk", "rajdeep"];
+
+      for (const lineitem of loop4Item) {
+        console.log(lineitem);
+      }
+      console.log("");
+
+      //  ----------------------- For In Loop -----------------------
+
+      const loop5Item = { apple: 5, banana: 8, Kiwi: 6 };
+
+      for (const nItem in loop5Item) {
+        console.log(nItem);
+        console.log(loop5Item[nItem]);
+      }
+      console.log("");
+      //  ----------------------- Reverse  Loop -----------------------
+
+      for (let loop6 = loop4Item.length - 1; loop6 >= 0; loop6 -= 1) {
+        console.log(loop6);
+      }
+      console.log("");
+
+      //  ----------------------- Looping Through Arrays -----------------------
+
+      for (let loop7 = 0; loop7 < loop4Item.length; loop7++) {
+        console.log(loop4Item[loop7]);
+      }
+      console.log("");
+
+      //  ----------------------- Looping Through Object -----------------------
+
+      const loop8 = Object.entries(loop5Item);
+      for (const [key, value] of loop8) {
+        console.log(`${key} : ${value}`);
+      }
+      console.log("");
+
+      //  ----------------------- Break Keyword -----------------------
+
+      for (let loop9 = 0; loop9 < 10; loop9++) {
+        if (loop9 > 5) {
+          break;
+        }
+        console.log(loop9);
+      }
+      console.log("");
+
+      //  ----------------------- Nested For Loop -----------------------
+
+      for (let loop10 = 0; loop10 < 2; loop10 += 1) {
+        for (let loop10n = 0; loop10n < 3; loop10n += 1) {
+          console.log(`${loop10} - ${loop10n}`);
+        }
+      }
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Object ********************************************
+
+      const person = {
+        Fname: "John",
+        Lname: "Doe",
+        Age: 25,
+        Gender: "Male",
+        nationality: "Indian",
+      };
+      console.log(person);
+      console.log("");
+
+      //  ----------------------- Object Property -----------------------
+
+      console.log(person.Fname);
+      console.log(person.nationality);
+      console.log("");
+      //  ----------------------- Object Method -----------------------
+
+      const person1 = {
+        Fname: "Mayur",
+        Lname: "Nakum",
+        FullName: function () {
+          return this.Fname + " " + this.Lname;
+        },
+      };
+      console.log(person1.FullName());
+      console.log("");
+
+      //  ----------------------- Object Classes -----------------------
+
+      // const nperson = new Person2();
+      // nperson.Fname = "Sally";
+      // nperson.Lname = "Doe";
+      // nperson.Age = 24;
+      // console.log(nperson);
+
+      // class Person2 {
+      //   constructor(Fname, Lname) {
+      //     this.Fname = Fname;
+      //     this.Lname = Lname;
+      //   }
+      //   greeting() {
+      //     return `${this.Fname} - ${this.Lname}`;
+      //   }
+      // }
+      console.log("");
+
+      //  ******************************************** Conditionals ********************************************
+
+      //  ----------------------- If Statement -----------------------
+
+      const FSatement = true;
+      // if (FSatement) {
+      //   console.log("Fsatement is Run");
+      // }
+      // console.log("")
+
+      //  ----------------------- If else Statement -----------------------
+
+      if (FSatement == true) {
+        console.log("This Ans. Is" + " " + FSatement);
+      } else {
+        console.log("This Ans. Is Wrong");
+      }
+      console.log("");
+
+      //  ----------------------- else if Statement -----------------------
+
+      const LStatement = 13;
+
+      if (LStatement <= 10) {
+        console.log("Good Morning");
+      } else if (LStatement <= 12) {
+        console.log("Good Aftenoon");
+      } else {
+        console.log("Good Evening");
+      }
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Number methods ********************************************
+
+      const num = 25.21;
+      console.log(Number.isFinite(num));
+      console.log(Number.isInteger(num));
+      console.log(Number.isNaN(num));
+      console.log(num.toExponential());
+      console.log(num.toFixed(2));
+      console.log(num.toLocaleString());
+      console.log(num.toString());
+      console.log(num.toPrecision(2));
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Enums ********************************************
+
+      const Enums = Object.freeze({
+        north: 0,
+        south: 1,
+        east: 2,
+        west: 3,
+      });
+
+      Object.keys(Enums).forEach((ele) => console.log(ele));
+      console.log("");
+      console.log("");
+
+      //  ******************************************** Json ********************************************
+
+      let jsonString = '{"Hello" : "World"}';
+      console.log(JSON.parse(jsonString));
+      console.log("");
+
+      let jsonString1 = {
+        Hello: "World",
+      };
+      console.log(JSON.stringify(jsonString1));
+    </script>
+  </body>
+</html>

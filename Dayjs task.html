@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day Js Task</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+    <script>
+      const Data = [
+        "09-11-2023",
+        "08-06-2023",
+        "09-04-2023",
+        "07-23-2023",
+        "07-25-2023",
+        "06-19-2023",
+      ];
+      console.log("Dates", Data);
+
+      const fixDate = dayjs("07-24-2023");
+      const fordate = fixDate.format("DD-MM-YYYY");
+      console.log("FixDate :", fordate);
+
+      const mpDate = Data.map((e) => {
+        console.log(e);
+        return {  isAfter: fixDate.isBefore(e) };
+      });
+
+      console.log("Output", mpDate);
+    </script>
+  </body>
+</html>

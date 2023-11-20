@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js scope project</title>
+  </head>
+  <body>
+    <script>
+      const name1 = "jorn";
+      const name2 = "Sally";
+
+      const readEvent = () => {
+        const random = Math.floor(Math.random() * 3);
+        console.log(random);
+
+        if (random === 0) {
+          return "Marathon";
+        } else if (random === 1) {
+          return "Triathon";
+        } else if (random === 2) {
+          return "pentathon";
+        }
+      };
+
+      const getTraining = (event) => {
+        let days;
+        if (event === "Marathon") {
+          days = 50;
+        } else if (event === "Triathon") {
+          days = 80;
+        } else if (event === "pentathon") {
+          days = 22;
+        }
+        return days;
+      };
+
+      const logEvent = (name, event) => {
+        console.log(`${name}'s event is: ${event}`);
+      };
+
+      const logTime = (name, days) => {
+        console.log(`${name}'s time to train is ${days} days`);
+      };
+
+      const event = readEvent();
+      const days = getTraining(event);
+
+      logEvent(name1, event);
+      logTime(name1z, days);
+
+      const event2 = readEvent();
+      const days2 = getTraining(event2);
+
+      logEvent(name2, event2);
+      logTime(name2, days2);
+    </script>
+  </body>
+</html>

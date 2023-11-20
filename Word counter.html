@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Counter</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      background: rgb(170, 85, 85);
+    }
+
+    ::selection {
+      background-color: rgb(170, 85, 85);
+      color: #fff;
+    }
+
+    .box {
+      padding: 50px;
+    }
+
+    .box textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    .character {
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .character span {
+      font-size: 30px;
+      color: rgb(170, 85, 85);
+      font-weight: 550;
+    }
+
+    .use {
+      opacity: 0.8;
+    }
+
+    .extra-space {
+      background-color: rgb(170, 85, 85);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+    }
+  </style>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-light">Word Counter</h1>
+
+      <div class="box col-md-8 mt-4 m-auto bg-light">
+        <label class="form-label">Word Counter</label>
+        <textarea
+          id="input"
+          class="form-control"
+          placeholder="Type any think..."
+        ></textarea>
+        <br />
+        <div class="button-group">
+          <button class="btn extra-space btn-danger" id="trim">
+            Remove Extra space
+          </button>
+          <button class="btn extra-space btn-danger" id="copy">
+            Copy Text
+          </button>
+          <button class="btn extra-space btn-danger" id="clear">
+            Clear Text
+          </button>
+        </div>
+        <hr />
+
+        <div class="character">
+          You have <span id="word">0</span> word and
+          <span id="character">0</span> character
+        </div>
+
+        <div class="output mt-4">
+          <strong>Your Output :-</strong>
+          <p id="output"></p>
+        </div>
+
+        <div class="use mt-4">
+          <strong> How To use : - </strong>
+          <br />
+          Enter or Paste your text into the textbox to a count of characters and
+          words.
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("input");
+      const word = document.getElementById("word");
+      const character = document.getElementById("character");
+      const output = document.getElementById("output");
+      const trim = document.getElementById("trim");
+      const clear = document.getElementById("clear");
+      const copy = document.getElementById("copy");
+
+      trim.addEventListener("click", () => {
+        const newText = input.value;
+        const trimmedText = newText.replace(/\s+/g, " ");
+        input.value = trimmedText;
+        input.dispatchEvent(new Event("input"));
+        console.log("remove Extra space");
+      });
+
+      copy.addEventListener("click", () => {
+        navigator.clipboard.writeText(input.value);
+        console.log("copy text");
+      });
+
+      clear.addEventListener("click", () => {
+        const conform = confirm("you are sure the text is delete");
+        if (conform === true) {
+          input.value = " ";
+          word.textContent = 0;
+          character.textContent = 0;
+          output.textContent = "";
+        }
+        console.log("Clear Text");
+      });
+
+      input.addEventListener("input", () => {
+        const text = input.value;
+        const characters = text.length;
+        const words = text.trim().split(/\s+/).filter(Boolean).length;
+        // console.log("text", text);
+        // console.log("words", words);
+        // console.log("characters", characters);
+
+        word.textContent = words;
+        character.textContent = characters;
+        output.textContent = text;
+      });
+    });
+  </script>
+</html>

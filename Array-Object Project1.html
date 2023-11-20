@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Object Project 3</title>
+  </head>
+  <body>
+    <script>
+      const Arr = [
+        {
+          id: "459be983-e977-4a9d-9f80-ba86581aa080",
+          plotData: [
+            {
+              id: "6581c540-006e-0039-0000-000000000000",
+              type: "line",
+              name: "BCAG_PSG_Rheine_TBO-Line_Hyper Compressor_HYO_CR01_CHS_P-VT01_P-SEG1-RMS",
+              x: [
+                "09-11-2023",
+                "08-06-2023",
+                "09-04-2023",
+                "07-24-2023",
+                "06-19-2023",
+              ],
+              y: [0, 0, 0, 0, 0, 0],
+              line: [
+                {
+                  width: 2,
+                  color: "#1f77b4",
+                },
+              ],
+              yaxis: "y",
+              unit: "m/s²",
+              hoverinfo: "none",
+              visible: true,
+              // Before9: [],
+              // After9: [],
+            },
+            {
+              id: "6581c540-006e-0046-0000-000000000000",
+              type: "line",
+              name: "BCAG_PSG_Rheine_TBO-Line_Hyper Compressor_HYO_CR01_CYL1_HE_P-PT01_SEG1-PTP",
+              x: [
+                "09-04-2023",
+                "08-06-2023",
+                "09-11-2023",
+                "07-23-2023",
+                "06-19-2023",
+                "07-25-2023",
+              ],
+              y: [0, 0, 0, 0, 0, 0],
+              line: [
+                {
+                  width: 1,
+                  color: "#ff7f0e",
+                },
+              ],
+              yaxis: "y2",
+              unit: "bar a",
+              hoverinfo: "none",
+              visible: true,
+              // Before9: [],
+              // After9: [],
+            },
+          ],
+        },
+        {
+          id: "dfc6be62-750d-4caa-87e8-8662ea25a30f",
+          plotData: [
+            {
+              id: "6581c540-006e-0048-0000-000000000000",
+              type: "line",
+              name: "BCAG_PSG_Rheine_TBO-Line_Hyper Compressor_HYO_CR01_CYL1_P-PO01X_P-SEG1-PTP",
+              x: [
+                "08-06-2023",
+                "09-11-2023",
+                "07-23-2023",
+                "07-25-2023",
+                "09-04-2023",
+              ],
+              y: [2.204099655151367],
+              line: [
+                {
+                  width: 2,
+                  color: "#1f77b4",
+                },
+              ],
+              yaxis: "y",
+              unit: "µm",
+              hoverinfo: "none",
+              visible: true,
+              // Before9: [],
+              // After9: [],
+            },
+            {
+              id: "6581c540-006e-004a-0000-000000000000",
+              type: "line",
+              name: "BCAG_PSG_Rheine_TBO-Line_Hyper Compressor_HYO_CR01_CYL1_P-PO01Y_SEG1-AVG2REF",
+              x: ["07-23-2023", "07-25-2023", "06-19-2023"],
+              y: [
+                1111.137451171875, 1111.137451171875, 1111.137451171875,
+                1111.137451171875, 1111.137451171875, 1111.137451171875,
+              ],
+              line: [
+                {
+                  width: 1,
+                  color: "#ff7f0e",
+                },
+              ],
+              yaxis: "y2",
+              unit: "µm2",
+              hoverinfo: "none",
+              visible: true,
+              // Before9: [],
+              // After9: [],
+            },
+            {
+              id: "6581c540-006e-0038-0000-000000000000",
+              type: "line",
+              name: "BCAG_PSG_Rheine_TBO-Line_Hyper Compressor_HYO_CR01_CHS_P-VT01_P-SEG36-RMS S1",
+              x: [
+                "09-11-2023",
+                "08-06-2023",
+                "09-04-2023",
+                "06-19-2023",
+                "07-23-2023",
+                "07-25-2023",
+              ],
+              y: [0, 0, 0, 0, 0, 0],
+              line: [
+                {
+                  width: 1,
+                  color: "#2ca02c",
+                },
+              ],
+              yaxis: "y3",
+              unit: "m/s1",
+              hoverinfo: "none",
+              visible: true,
+              // Before9: [],
+              // After9: [],
+            },
+            {
+              id: "6581c540-006e-0038-0000-000000000000",
+              type: "line",
+              name: "BCAG_PSG_Rheine_TBO-Line_Hyper Compressor_HYO_CR01_CHS_P-VT01_P-SEG36-RMS S2",
+              x: [
+                "07-23-2023",
+                "09-11-2023",
+                "06-19-2023",
+                "08-06-2023",
+                "09-25-2023",
+              ],
+              y: [0, 0, 0, 0, 0, 0],
+              line: [
+                {
+                  width: 3,
+                  color: "#d62728",
+                },
+              ],
+              yaxis: "y",
+              unit: "m/s2",
+              hoverinfo: "none",
+              visible: true,
+              // Before9: [],
+              // After9: [],
+            },
+          ],
+        },
+      ];
+
+      console.log("Array", Arr);
+
+      const Arr2 = Arr.map((ele1) => {
+        console.log("ele1", ele1);
+        return {
+          ...ele1,
+          plotData: ele1.plotData.map((ele2) => {
+            console.log("ele2", ele2.line);
+            return {
+              ...ele2,
+              line: ele2.line.filter((ele3) => {
+                console.log(ele3);
+                if (ele3.width === 1) {
+                  return ele3;
+                } else {
+                  return null;
+                }
+              }),
+            };
+          }),
+        };
+      });
+
+      console.log("Array2", Arr2);
+    </script>
+  </body>
+</html>

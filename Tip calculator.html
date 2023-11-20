@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tip Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    .box {
+      padding: 50px;
+      box-shadow: 5px 5px 10px #c1c1c1, -5px -5px 10px #ffff;
+    }
+    .box button {
+      width: 100%;
+      box-shadow: 5px 5px 10px #c1c1c1, -5px -5px 10px #ffff;
+    }
+  </style>
+  <body>
+    <div class="container mt-5">
+      <h1>Tip Calculator</h1>
+      <div class="box bg-light col-md-6 m-auto mt-3">
+        <label class="form-label">How much was your bill?</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input id="bill" type="text" class="form-control" />
+        </div>
+        <br />
+        <label class="form-label">How was your service?</label>
+        <select
+          id="pay"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option disabled selected value="0">Open this select menu</option>
+          <option value="0.30">30% - Outstanding</option>
+          <option value="0.15">15% - Good</option>
+          <option value="0.10">10% - Bad</option>
+          <option value="0.05">5% - Tarrible</option>
+        </select>
+        <br />
+        <label class="form-label">How many people are sharing the bill?</label>
+        <div class="input-group">
+          <input id="people" type="text" class="form-control" />
+          <span class="input-group-text">people</span>
+        </div>
+        <br />
+        <button type="button" class="btn btn-danger p-2">CALCULATE</button>
+        <br />
+        <br />
+        <div id="result"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const calculate = document.querySelector(".btn");
+    console.log("calculate", calculate);
+    calculate.addEventListener("click", function () {
+      const amount = document.querySelector("#bill").value;
+      console.log("amount", amount);
+      const tipSelect = document.querySelector("#pay").value;
+      console.log("tipSelect", tipSelect);
+      const people = document.querySelector("#people").value;
+      console.log("people", people);
+
+      if (amount === " " || tipSelect === 0 || people === "") {
+        console.log("Blank Alert");
+        return alert("Please Fill The All Data");
+      } else if (isNaN(amount) || isNaN(people)) {
+        console.log("Wrong Alert");
+        return alert("please enter the valid data");
+      }
+      let total = (amount * tipSelect) / people;
+      console.log("total", total);
+
+      total = Math.round(total * 100) / 100;
+      total = total.toFixed(2);
+
+      document.getElementById("result").innerHTML = `
+      <div class='bg-success text-white text-center p-2'>
+        <h2>
+            Tip:- <br>
+            ${total} each
+        </h2>
+      </div>
+      `;
+    });
+  </script>
+</html>

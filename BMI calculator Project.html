@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI calculator Project</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      .box {
+        margin: auto;
+        padding: 50px;
+        width: 500px;
+        background-color: transparent;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 5px 5px 10px #c1c1c1, -5px -5px 10px rgb(169, 193, 169);
+      }
+
+      .box button {
+        border: none;
+        width: 100%;
+        box-shadow: 5px 5px 10px #c1c1c1, -5px -5px 10px rgb(169, 193, 169);
+      }
+
+      .bmi {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        color: white;
+        background-color: rgb(56, 101, 56);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>BMI Calculator</h1>
+
+      <div class="box mt-5">
+        <label class="form-label">Height (cm)</label>
+        <input
+          type="text"
+          class="height form-control border-success"
+          placeholder="Height in cm"
+        />
+        <br />
+
+        <label class="form-label">Weight (Kg)</label>
+        <input
+          type="text"
+          class="weight form-control border-success"
+          placeholder="Weight in Kg"
+        />
+        <br />
+
+        <button type="submit" id="submit" class="btn btn-success">
+          Check BMI
+        </button>
+        <br />
+        <br />
+
+        <div id="result">
+          <!-- <div class="bmi">
+            <h5>...........</h5>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <script>
+      var calculate = document.querySelector(".btn");
+      console.log("calculate", calculate);
+      calculate.addEventListener("click", function () {
+        var height = document.querySelector(".height").value;
+        console.log("height", height);
+        var weight = document.querySelector(".weight").value;
+        console.log("weight", weight);
+
+        if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) {
+          console.log("Falid");
+          return alert("Please fill all fields with valid numbers");
+        }
+        height = height / 100;
+        console.log("Newheight", height);
+        var BMI = weight / (height * height);
+        console.log("BMI", BMI);
+        result(BMI);
+      });
+
+      function result(BMI) {
+        var print = document.querySelector("#result");
+        console.log(print);
+        var bmiStatus;
+        if (BMI < 18.5) {
+          bmiStatus = "Under Waight";
+        } else if (BMI < 25) {
+          bmiStatus = "Normal";
+        } else if (BMI < 30) {
+          bmiStatus = "Over Weight";
+        } else {
+          bmiStatus = "Obese";
+        }
+        console.log("bmiStatus", bmiStatus);
+        print.innerHTML = `
+        <div class="bmi">
+            <h5> Your BMI is ${BMI.toFixed(2)} and you are ${bmiStatus}. </h5>
+        </div>
+        `;
+      }
+    </script>
+  </body>
+</html>

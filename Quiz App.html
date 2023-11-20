@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background-color: #0a80ed;
+    }
+
+    .start-container,
+    .score-container {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #start-button,
+    #restart {
+      font-size: 1.3em;
+      padding: 0.5em 1.8em;
+      border-radius: 0.2em;
+    }
+    #restart {
+      margin-top: 0.9rem;
+    }
+    .display-container {
+      width: 80%;
+      max-width: 37.5em;
+      margin: 0 auto;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      border-radius: 0.6em;
+      position: absolute;
+      padding: 3.1em 1.8em;
+    }
+    .header {
+      margin-bottom: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.6rem;
+      border-bottom: 0.1em solid #c0bfd2;
+    }
+    .timer-div {
+      background-color: #e1f5fe;
+      width: 7.5em;
+      border-radius: 1.8em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7em 1.8em;
+    }
+
+    .question {
+      margin-bottom: 1.25em;
+      font-weight: 600;
+    }
+    .option-div {
+      font-size: 0.9em;
+      width: 100%;
+      padding: 1em;
+      margin: 0.3em 0;
+      text-align: left;
+      outline: none;
+      background: transparent;
+      border: 1px solid #c0bfd2;
+      border-radius: 0.3em;
+    }
+    .option-div:disabled {
+      color: #000000;
+      cursor: not-allowed;
+    }
+
+    .timer-div i {
+      color: #0a80ed;
+      font-size: 25px;
+    }
+    .timer-div span {
+      font-size: 20px;
+    }
+
+    #next-button {
+      font-size: 1em;
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.8rem;
+      float: right;
+    }
+
+    .hide {
+      display: none;
+    }
+    .incorrect {
+      background-color: #ffdde0;
+      color: #d32f2f;
+      border-color: #d32f2f;
+    }
+    .correct {
+      background-color: #e7f6d5;
+      color: #689f38;
+      border-color: #689f38;
+    }
+
+    #user-score {
+      font-size: 1.5em;
+    }
+  </style>
+  <body>
+    <div class="start-container">
+      <button id="start-button" class="btn btn-light">Start</button>
+    </div>
+    <h1 class="text-light m-5">Quiz App</h1>
+
+    <div id="display-container" class="display-container bg-light">
+      <div class="header">
+        <div class="number-of-count">
+          <span class="number-of-question">1 of 3 Questions</span>
+        </div>
+        <div class="timer-div">
+          <i class="bi bi-stopwatch-fill"></i>
+          <span class="time-left">20s</span>
+        </div>
+      </div>
+      <div id="container"></div>
+      <button id="next-button" class="btn btn-primary">Next</button>
+    </div>
+
+    <div class="score-container hide">
+      <div id="user-score" class="text-light">Demo Score</div>
+      <button id="restart" class="btn btn-light">Restart</button>
+    </div>
+  </body>
+  <script>
+    // Reference
+    let timeLeft = document.querySelector(".time-left");
+    console.log("timeLeft", timeLeft);
+    let quizContainer = document.getElementById("container");
+    console.log("quizContainer", quizContainer);
+    let nextBtn = document.getElementById("next-button");
+    console.log("nextBtn", nextBtn);
+    let countOfQuestion = document.querySelector(".number-of-question");
+    console.log("countOfQuestion", countOfQuestion);
+    let displayContainer = document.getElementById("display-container");
+    console.log("displayContainer", displayContainer);
+    let scoreContainer = document.querySelector(".score-container");
+    console.log("scoreContainer", scoreContainer);
+    let restart = document.getElementById("restart");
+    console.log("restart", restart);
+    let userScore = document.getElementById("user-score");
+    console.log("userScore", userScore);
+    let startScreen = document.querySelector(".start-container");
+    console.log("startScreen", startScreen);
+    let startButton = document.getElementById("start-button");
+    console.log("startButton", startButton);
+    let questionCount;
+    console.log("questionCount", questionCount);
+    let scoreCount = 0;
+    console.log("scoreCount", scoreCount);
+    let count = 21;
+    console.log("count", count);
+    let countdown;
+    console.log("countdown", countdown);
+
+    //Questions and Options array
+    const quizArray = [
+      {
+        id: "0",
+        question: "Which is the most widely spoken language in the world?",
+        options: ["Spanish", "Mandarin", "English", "German"],
+        correct: "Mandarin",
+      },
+      {
+        id: "1",
+        question: "Which is the only continent in the world without a desert?",
+        options: ["North America", "Asia", "Africa", "Europe"],
+        correct: "Europe",
+      },
+      {
+        id: "2",
+        question: "Who invented Computer?",
+        options: [
+          "Charles Babbage",
+          "Henry Luce",
+          "Henry Babbage",
+          "Charles Luce",
+        ],
+        correct: "Charles Babbage",
+      },
+    ];
+    console.log("quizArray", quizArray);
+
+    //Display Quiz
+    const quizDisplay = (questionCount) => {
+      let quizCards = document.querySelectorAll(".container-mid");
+      console.log("quizCards", quizCards);
+
+      quizCards.forEach((card) => {
+        card.classList.add("hide");
+        console.log("Other cards hide");
+      });
+      //display current question card
+      quizCards[questionCount].classList.remove("hide");
+    };
+    // Create Quiz
+    function quizCreator() {
+      quizArray.sort(() => Math.random() - 0.5);
+      for (let i of quizArray) {
+        // console.log("All Question", i);
+
+        //Randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+
+        // Quis Card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+
+        // Question number
+        countOfQuestion.innerHTML =
+          1 + " of " + quizArray.length + " Question ";
+        // console.log('countOfQuestion', countOfQuestion);
+
+        //Question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        console.log("question_DIV", question_DIV);
+        div.innerHTML += `
+        <button class='option-div' onclick = 'checker(this)'>${i.options[0]}</button>
+        <button class='option-div' onclick = 'checker(this)'>${i.options[1]}</button>
+        <button class='option-div' onclick = 'checker(this)'>${i.options[2]}</button>
+        <button class='option-div' onclick = 'checker(this)'>${i.options[3]}</button>
+        `;
+        quizContainer.appendChild(div);
+        console.log("div", div);
+      }
+    }
+
+    //Checker Function to check if option is correct or not
+    function checker(userOption) {
+      let userSolution = userOption.innerText;
+      // console.log("userSolution", userSolution);
+
+      let question =
+        document.getElementsByClassName("container-mid")[questionCount];
+      // console.log('question', question);
+
+      let options = question.querySelectorAll(".option-div");
+      // console.log('options', options);
+
+      if (userSolution === quizArray[questionCount].correct) {
+        userOption.classList.add("correct");
+        scoreCount++;
+        console.log("Correct Answer");
+      } else {
+        console.log("Incorrect Answer");
+        userOption.classList.add("incorrect");
+        options.forEach((ele) => {
+          // console.log("ele", ele);
+          if (ele.innerText == quizArray[questionCount].correct) {
+            ele.classList.add("correct");
+          }
+        });
+      }
+      clearInterval(countdown);
+      options.forEach((ele) => {
+        ele.disabled = true;
+        // console.log('ele', ele);
+        // console.log("Time Is up of you are not choose option")
+      });
+    }
+
+    //Time
+    const timerDisplay = () => {
+      countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+          clearInterval(countdown);
+          displayNext();
+          console.log("Time Is up of you are not choose option");
+        }
+      }, 1000);
+    };
+
+    // Next Button
+    nextBtn.addEventListener(
+      "click",
+      (displayNext = () => {
+        questionCount += 1;
+        console.log("Next");
+
+        if (questionCount == quizArray.length) {
+          displayContainer.classList.add("hide");
+          scoreContainer.classList.remove("hide");
+          userScore.innerHTML = `Your score is ${scoreCount} out of ${questionCount}`;
+          console.log("Quiz Complete");
+        } else {
+          countOfQuestion.innerHTML =
+            questionCount + 1 + " of " + quizArray.length + " Question";
+          quizDisplay(questionCount);
+          count = 21;
+          clearInterval(countdown);
+          timerDisplay();
+          console.log(" you are not choose option");
+        }
+      })
+    );
+
+    //Restart Quiz
+    restart.addEventListener("click", () => {
+      initial();
+      displayContainer.classList.remove("hide");
+      scoreContainer.classList.add("hide");
+      console.warn("You Restart The Quiz");
+    });
+
+    //initial setup
+    function initial() {
+      quizContainer.innerHTML = "";
+      questionCount = 0;
+      scoreCount = 0;
+      count = 21;
+      clearInterval(countdown);
+      timerDisplay();
+      quizCreator();
+      quizDisplay(questionCount);
+    }
+
+    //when user click on start button
+    startButton.addEventListener("click", () => {
+      console.warn("You will start your Quiz");
+      startScreen.classList.add("hide");
+      displayContainer.classList.remove("hide");
+      initial();
+    });
+
+    //hide quiz and display start screen
+    window.onload = () => {
+      startScreen.classList.remove("hide");
+      displayContainer.classList.add("hide");
+    };
+  </script>
+</html>
